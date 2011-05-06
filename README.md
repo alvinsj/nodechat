@@ -1,5 +1,7 @@
 ## a socket chatroom + todo using socketio+nodejs+(backbonejs-sample-todos)  
 
+a quick hack to try out chat on socketio, backbonejs mvc with its todo list example.  
+
 #### inspired by  
 * [socketio](http://socket.io)  
 * [nodejs](http://nodejs.org)  
