@@ -1,6 +1,12 @@
 ## a socket chatroom + todo using socketio+nodejs+(backbonejs-sample-todos)  
 
+#### about  
 a quick hack to try out chat on socketio, backbonejs mvc with its todo list example.  
+made it for fun with in mind integrating with our other bots in [buUuk](http://buuuk.com) in the future.  
+
+see the [demo](http://lah.no.de/chat) in action, you can try out with username:demo and password:node, allows duplicate logins.  
+you can also compile the [honcheng's iOS client](https://github.com/honcheng/iOS-nodechat) to test it out with lahnode server too!  
+Have fun with the real time web with socket.io!  
 
 #### inspired by  
 * [socketio](http://socket.io)  
@@ -38,4 +44,5 @@ a quick hack to try out chat on socketio, backbonejs mvc with its todo list exam
 * make sure the html page is connected to the nodejs server, you will see "client <random number> connected", when you type message in the chat box, you will see "Please login to chat"  
 
 #### links  
-check out [@honcheng](http://github.com/honcheng) to get the iphone/ipad client  
+check out [@honcheng's repo](http://github.com/honcheng) to get the iphone/ipad client  
+tweet me at [@alvinsj](http://alvinsj.com) if you have any question on this repo  
