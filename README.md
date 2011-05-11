@@ -45,4 +45,4 @@ Have fun with the real time web with socket.io!
 
 #### links  
 check out [@honcheng's repo](http://github.com/honcheng) to get the iphone/ipad client  
-tweet me at [@alvinsj](http://alvinsj.com) if you have any question on this repo  
+tweet me at [@alvinsj](http://twitter.com/alvinsj) if you have any question on this repo  
