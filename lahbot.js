@@ -56,7 +56,7 @@ function post_request(socket,client,session,request){
 			res.on('data', function (chunk) {
 			    logger.log('BODY: ' + chunk);
 				if(count>10) return;
-				socketclient.message(socket,"(@lahbot)>@"+session.username+": nah~"+chunk);
+				socketclient.message(client,"(@lahbot)>@"+session.username+": nah~"+chunk);
 				count++;
 			});
 		}).on('error', function(e) {
@@ -133,14 +133,15 @@ function mention(socket,client,session,request){
 	var mention = request.message.match(/@([\s\S]*)/);
 	if(mention && mention.length==2){
 		database.check_user_session(mention[1],function(result){
-			if(!result){
-				socketclient.broadcast(socket, request.message);
+			if(result)
+				return -1;
+			else{
+				socketclient.broadcast(socket,"@"+session.username+": "+request.message);
 				request = new Object;
 				request.command = "message";
 				request.message = "@lahbot request "+config.push_notify_url(ding[1],session.username+" ding u!");
 				chat.talk(socket,client,request);
-			}else
-				return -1;
+			}
 		});
 		return 1;
 	}else
