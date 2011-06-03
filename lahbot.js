@@ -16,6 +16,7 @@ function understand(socket,client,session,request){
 	res = res==1?1:remember(socket,client,session,request);
 	res = res==1?1:do_something(socket,client,session,request);
 	res = res==1?1:friendly(socket,client,session,request);
+	res = res==1?1:mention(socket,client,session,request);
 	return res;
 }
 
@@ -36,8 +37,8 @@ function post_request(socket,client,session,request){
 	var lahbotRequest = request.message.match(/^@lahbot request http:\/\/([a-z\.]+):([0-9]+)(.*)$/);
 	
 	if(lahbotRequest && lahbotRequest.length==4){
-		socketclient.broadcast(socket,"@"+session.username+": "+request.message);
-		socketclient.broadcast(socket,"(@lahbot): @"+session.username+" ok i am sending your request!");
+		socketclient.message(client,"@"+session.username+": "+request.message);
+		socketclient.message(client,"(@lahbot): @"+session.username+" ok i am sending your request!");
 	
 		var options = {
 			host: lahbotRequest[1],
@@ -55,7 +56,7 @@ function post_request(socket,client,session,request){
 			res.on('data', function (chunk) {
 			    logger.log('BODY: ' + chunk);
 				if(count>10) return;
-				socketclient.broadcast(socket,"(@lahbot)>@"+session.username+": nah~"+chunk);
+				socketclient.message(socket,"(@lahbot)>@"+session.username+": nah~"+chunk);
 				count++;
 			});
 		}).on('error', function(e) {
@@ -123,6 +124,22 @@ function ding(socket,client,session,request){
 		request.command = "message";
 		request.message = "@lahbot request "+config.push_notify_url(ding[1],session.username+" ding u!");
 		chat.talk(socket,client,request);
+		return 1;
+	}else
+		return -1;
+}
+
+function mention(socket,client,session,request){
+	var mention = request.message.match(/@([\s\S]*)/);
+	if(mention && mention.length==2){
+		database.check_user_session(mention[1],function(result){
+			if(!result){
+				request = new Object;
+				request.command = "message";
+				request.message = "@lahbot request "+config.push_notify_url(ding[1],session.username+" ding u!");
+				chat.talk(socket,client,request);
+			}
+		});
 		return 1;
 	}else
 		return -1;

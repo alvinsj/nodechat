@@ -83,6 +83,16 @@ function login_session(client,user,callback) {
 	
 }
 
+function check_user_session(username,callback) {
+	UserSession.findOne({username:username, valid:true},function(err,doc){
+		logger.log("get client session: "+client.sessionId+" doc:"+JSON.stringify(doc));
+		if (doc) 
+			callback(doc);
+		else
+			callback(false);
+	});
+}
+
 function get_user_session(client,callback) {
 	UserSession.findOne({session:client.sessionId, valid:true},function(err,doc){
 		logger.log("get client session: "+client.sessionId+" doc:"+JSON.stringify(doc));
@@ -212,6 +222,7 @@ exports.login = login;
 exports.login_session = login_session;
 exports.logout_session = logout_session;
 exports.get_user_session = get_user_session;
+exports.check_user_session = check_user_session;
 exports.save_message = save_message;
 exports.get_active_users = get_active_users;
 exports.get_last_messages = get_last_messages;
