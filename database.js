@@ -31,14 +31,25 @@ var UserSession = new Schema({
 	valid:Boolean
 });
 
+var LahbotMemory = new Schema({
+	user_id:String,
+	command:String,
+	message:String,
+	mode:String
+});
+
 mongoose.model('User',User);
 mongoose.model('UserSession', UserSession);
 mongoose.model('Conversation', Conversation);
+mongoose.model('LahbotMemory', LahbotMemory);
 
 exports.db = mongoose;
 
-
+var Conversation = mongoose.model('Conversation');
 var User = mongoose.model('User');
+var UserSession = mongoose.model('UserSession');
+var LahbotMemory = mongoose.model('LahbotMemory');
+
 function login(username,password,callback) {
 	User.findOne({username:username,password:password},function(err,doc){
 		logger.log("look up username:"+username);
@@ -51,7 +62,6 @@ function login(username,password,callback) {
 	});
 }
 
-var UserSession = mongoose.model('UserSession');
 function login_session(client,user,callback) {
 	UserSession.findOne({session:client.sessionId, valid:true},function(err,doc){
 		logger.log("login session: "+user.username)
@@ -149,8 +159,6 @@ function get_active_users(clients,callback,final_callback) {
 		
 }
 
-var Conversation = mongoose.model('Conversation');
-
 function get_last_messages(count,callback){
 	logger.log("getting last "+count+" messages");
 	
@@ -164,6 +172,42 @@ function get_last_messages(count,callback){
 	});
 }
 
+
+function lahbot_remember(user_id, command, message, mode, callback){
+	logger.log("lahbot remember things");
+	User.findById(user_id,function(err,user){
+		if(user){
+			// create a comment
+			var today = new Date();
+			
+			var i = new LahbotMemory();
+			i.body = message;
+			i.date = today;
+			i.user_id = user._id;
+			i.command = command;
+			i.message = message;
+			
+			i.save(function(err){
+				if(!err)
+					callback(i);
+				else
+					callback(false);
+			});			
+			
+		}
+	});
+}
+
+function lahbot_command(command, callback){
+	LahbotMemory.findOne({command:command},function(err,doc){
+		if (doc)
+			callback(doc);
+		else
+			callback(false);
+	});
+}
+
+
 exports.login = login;
 exports.login_session = login_session;
 exports.logout_session = logout_session;
@@ -171,3 +215,5 @@ exports.get_user_session = get_user_session;
 exports.save_message = save_message;
 exports.get_active_users = get_active_users;
 exports.get_last_messages = get_last_messages;
+exports.lahbot_remember = lahbot_remember;
+exports.lahbot_command = lahbot_command;

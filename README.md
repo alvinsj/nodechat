@@ -1,12 +1,6 @@
 ## a socket chatroom + todo using socketio+nodejs+(backbonejs-sample-todos)  
 
-#### about  
 a quick hack to try out chat on socketio, backbonejs mvc with its todo list example.  
-made it for fun with in mind integrating with our other bots in [buUuk](http://buuuk.com) in the future.  
-
-see the [demo](http://lah.no.de/chat) in action, you can try out with username:demo and password:node, allows duplicate logins.  
-you can also compile the [honcheng's iOS client](https://github.com/honcheng/iOS-nodechat) to test it out with lahnode server too!  
-Have fun with the real time web with socket.io!  
 
 #### inspired by  
 * [socketio](http://socket.io)  
@@ -19,8 +13,12 @@ Have fun with the real time web with socket.io!
 * todo list with local storage (originally implemented by [Jérôme Gravel-Niquet](http://jgn.me/)  
 * user verification to enter a chat/broadcast message  
 * check in current location with web browser  
-* chatroom features with command: key in /help(command for help), /ding(play a ding sound), /whoishere(check login users), /get10(get last 10 messages), /crashnode(force restart server, for development), "@lahbot request http://callapi.com:8080/api/getsomething" (send request and get response)  
+* chatroom features with command: key in /help(command for help), /ding(play a ding sound), /whoishere(check login users), /get10(get last 10 messages), /crashnode(force restart server, for development)
 * unfiltered message input, (e.g. place a youtube <iframe> to play music during chat), place image, audio, video tag in chatroom, or place a chatroom within a chatroom, etc  
+
+#### chatroom bot  
+* send http request - e.g.: "@lahbot request http://callapi.com:8080/api/getsomething" (action:send request and get response)  
+* remember command - e.g: "@lahbot $remember [$helloworld] [Hello world!]" (usage:@lahbot $helloworld)(action:send a message "Hello world!")  
 
 #### server requirement  
 * nodejs server   
@@ -44,5 +42,4 @@ Have fun with the real time web with socket.io!
 * make sure the html page is connected to the nodejs server, you will see "client <random number> connected", when you type message in the chat box, you will see "Please login to chat"  
 
 #### links  
-check out [@honcheng's repo](http://github.com/honcheng) to get the iphone/ipad client  
-tweet me at [@alvinsj](http://twitter.com/alvinsj) if you have any question on this repo  
+check out [@honcheng](http://github.com/honcheng) to get the iphone/ipad client  

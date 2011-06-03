@@ -18,7 +18,8 @@ var database = require('./database'),
 // load server components
 var	auth = require('./auth'),
 	location = require('./location'),
-	chat = require('./chat');
+	chat = require('./chat'),
+	socketclient = require('./socketclient');
 
 socket.on('connection',function(client){
 	

@@ -21,7 +21,7 @@ function whoishere(socket,client,session){
 	});
 }
 
-function logout(socket,clietn,session){
+function logout(socket,client,session){
 	database.logout_session(client, function(res){
 		socketclient.message(client,"<p style='color:grey'>you have been logged out!</p>");
 	});
@@ -49,15 +49,10 @@ function help(socket,client,session){
 
 function understand(socket,client,session,request){
 	
-	lahbot.understand(socket,client,session,request);
+	var ret = -1;
+	ret = lahbot.understand(socket,client,session,request);
 		
-	// send ding sound also by recognize when user mentioned ding
-	var str="";
-	var m = request.message.match(/ ding/);
-	if(m && m.length>0) for(var i=0;i<m.length;i++)str+='<audio src="ding.mp3" autoplay=true></audio>';
-	
-	socketclient.broadcast(socket,"@"+session.username+": "+request.message+str);
-	
+	return ret;
 }
 
 exports.talk = function(socket,client,request){
@@ -112,8 +107,9 @@ exports.talk = function(socket,client,request){
 						// otherwise
 						default:
 							logger.log("intelligence check");
-							understand(socket,client,session,request);
-							// broadcast message
+							if(understand(socket,client,session,request) == -1){
+								socketclient.broadcast(socket,"@"+session.username+": "+request.message);
+							}
 					}
 					
 				}
