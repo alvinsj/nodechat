@@ -85,7 +85,7 @@ function login_session(client,user,callback) {
 
 function check_user_session(username,callback) {
 	UserSession.findOne({username:username, valid:true},function(err,doc){
-		logger.log("get client session: "+client.sessionId+" doc:"+JSON.stringify(doc));
+		logger.log("get client session with username: "+username+" doc:"+JSON.stringify(doc));
 		if (doc) 
 			callback(doc);
 		else
