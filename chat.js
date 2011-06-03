@@ -44,7 +44,7 @@ function ding(socket,client,session){
 }
 
 function help(socket,client,session){
-	socketclient.message(client,"<p style='color:grey'>(@lahbot): let @lahbot help you!<br>/whoishere : check out who is in the chatroom<br>/get10 : get last 10 messages in chatroom<br>/ding : play the ding sound!<br>/logout : log out!<br>or message me with '@lahbot request http://myhq.com:1020/friday'<br>to play sam's favorite friday song! cheers!</p>");
+	socketclient.message(client,"<p style='color:grey'>(@lahbot): let @lahbot help you!<br>/whoishere : check out who is in the chatroom<br>/get10 : get last 10 messages in chatroom<br>/ding : play the ding sound!<br>/logout : log out!<br>or message me with '@lahbot request http://myhq.com:1020/friday'<br>to play sam's favorite friday song! cheers!</p>@lahbot $remember [$helloworld] [Hello world!]");
 }
 
 function understand(socket,client,session,request){

@@ -118,7 +118,7 @@ function do_something(socket,client,session,request){
 }
 
 function ding(socket,client,session,request){
-	var ding = request.message.match(/@lahbot ding ([\s\S]*)/);
+	var ding = request.message.match(/@lahbot ding @([\s\S]*)/);
 	if(ding && ding.length==2){
 		request = new Object;
 		request.command = "message";
@@ -130,16 +130,27 @@ function ding(socket,client,session,request){
 }
 
 function mention(socket,client,session,request){
-	var mention = request.message.match(/@([\s\S]*)/);
+	var mention = request.message.match(/.*?@([\S]+)[ ]?.*?/);
 	if(mention && mention.length==2){
-		database.check_user_session(mention[1],function(result){
-			if(result)
-				return -1;
+		socketclient.broadcast(socket,"@"+session.username+": "+request.message);
+		var users = [];
+		database.get_active_users(socket.clients,function(user){
+			if(user)
+				users.push(user.username);
+		},function(){
+			var around =false;
+			for(var i=0;i<users.length;i++){
+				if(users[i]==mention[1])
+					around=true;
+			}
+
+			if(around)
+				return;
 			else{
-				socketclient.broadcast(socket,"@"+session.username+": "+request.message);
+				var msg = request.message;
 				request = new Object;
 				request.command = "message";
-				request.message = "@lahbot request "+config.push_notify_url(ding[1],session.username+" ding u!");
+				request.message = "@lahbot request "+config.push_notify_url(mention[1],"@"+session.username+": "+msg);
 				chat.talk(socket,client,request);
 			}
 		});
