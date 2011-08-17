@@ -12,7 +12,7 @@ var Store = function(b) {
 };
 _.extend(Store.prototype, {
     save: function() {
-        localStorage.setItem(this.name, JSON.stringify(this.data))
+        //localStorage.setItem(this.name, JSON.stringify(this.data))
     },
     create: function(a) {
         if (!a.id) {

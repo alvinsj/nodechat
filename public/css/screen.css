@@ -74,8 +74,9 @@ body {
 
 /* line 17 */
 #chatroomapp {
-  width: 820px;
-  margin: 0 auto 40px auto;
+  width: auto;
+  margin: 0 13% 40px 13%;
+	padding: 10px;
   background: white;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
@@ -96,17 +97,28 @@ body {
 }
 /* line 24 */
 #chatroomapp .title h1 {
-  font-size: 36px;
+	font-family: 'Covered By Your Grace', cursive;
+  font-size: 72px;
   font-weight: bold;
   text-align: center;
   padding: 30px 0 10px 0;
   line-height: 1;
+	margin-bottom: 40px;
+}
+#chatroomapp .title h3 {
+	font-family: 'Covered By Your Grace', cursive;
+  font-size: 48px;
+  text-align: center;
+  padding: 30px 0 10px 0;
+  line-height: 1;
+	margin-bottom: 70px;
 }
 #login {
 	text-align:center;
 }
+
 #login input {
-  width: 20%;
+  width: 40%;
   font-size: 24px;
   font-family: inherit;
   line-height: 1em;
@@ -114,11 +126,21 @@ body {
   outline: none;
   padding: 6px;
   border: 1px solid #999999;
-  text-align: center;
+  text-align: left;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+	margin-bottom: 20px;
+}
+#login input#chatroom {
+  width: 20%;
+	text-align:center;
+}
+
+#description {
+	text-align:center;
+	margin:10px;
 }
 /* line 30 */
 #chatroomapp .content {
@@ -143,6 +165,7 @@ body {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
+
 /* line 45 */
 #chatroomapp .content #create-message input::-webkit-input-placeholder {
   font-style: italic;
@@ -323,25 +346,33 @@ body {
 }
 
 /* line 144 */
-#instructions {
-  width: 520px;
-  margin: 10px auto;
+#powered {
+	padding:10px;
   color: #fff;
+	font-size:11px;
+	background-color: #000000;
   text-shadow: rgba(255, 255, 255, 0.3) 0 1px 0;
-  text-align: center;
+  float: right;
 }
 /* line 150 */
-#instructions li {
+#powered li {
   line-height: 2em;
 }
-
-/* line 153 */
-#credits {
-  width: 520px;
-  margin: 30px auto;
-  color: #fff;
-  text-shadow: rgba(255, 255, 255, 0.3) 0 1px 0;
-  text-align: center;
+#powered a:link, #powered a:visited{
+	text-decoration:none;
+	color:#c0c0c0;
+} 
+#menu {
+	float:right;
+	padding:5px 10px;  
+}
+#menu a:link, a:visited{
+	text-decoration:none;
+	color:#ccc;
+}
+#menu a:hover{
+	text-decoration:underline;
+	color:black;
 }
 /* line 159 */
 #credits a {

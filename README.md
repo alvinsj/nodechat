@@ -1,8 +1,6 @@
-## a socket.io chatroom 
+## a socket chatroom + todo using socketio+nodejs+(backbonejs-sample-todos)  
 
-[demo](http://lah.no.de:8031/chat/) user:alvin|password:pass  
-
-a quick hack to try out chat on nodejs, socketio, mongodb, backbonejs mvc with its todo list example.  
+a quick hack to try out chat on socketio, backbonejs mvc with its todo list example.  
 
 #### inspired by  
 * [socketio](http://socket.io)  

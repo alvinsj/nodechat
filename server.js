@@ -1,83 +1,72 @@
+var Express = require('express');
 
-// load code library
-var http = require('http'),
-	io = require('socket.io'),
-	_ = require('./lib/underscore')._;
+var	server = Express.createServer(Express.logger()),
+		socket = require('socket.io').listen(server);
 
-// load service library
-var googlemaps = require('googlemaps');
+var Logger = require('./lib/logger'),
+		Auth = require('./lib/auth'),
+		Location = require('./lib/location'),
+		Chatbot = require('./lib/chatbot');
 
-// load server app library
-var database = require('./database'),
-	routes = require('./routes'),
-	server = routes.server,
-	socket = io.listen(server),
-	config = require('./config'),
-	logger = require('./logger');
-
-// load server components
-var	auth = require('./auth'),
-	location = require('./location'),
-	chat = require('./chat'),
-	socketclient = require('./socketclient');
-
-socket.on('connection',function(client){
-	
+socket.on('connection',function(client){	
+	// on receive message
 	client.on('message', function(message) {
 		
-		logger.log("received from socket:"+message);
+		Logger.log("Received json: "+message);
 		
-		// understand json request 
+		// understand json 
 		var request = "";
-		try{ request = JSON.parse(message); }
-		catch(e){ logger.log("Unable to parse request: "+ message); return; }
-		if(!request.command) {
-			logger.log("Invalid request: "+ message);  return;
+		
+		try{ 
+			request = JSON.parse(message); 
+		}catch(e){ Logger.log("Unable to parse request: "+ message); 
+			return; 
 		}
 		
-		// handle login
-		if(request.command == "login") {
-			logger.log("Logging in");
-			auth.login(socket,client,request);
+		// command not undestandable
+		if(!request.command){ Logger.log("Invalid request: "+ message);
+			return;
 		}
-		// handle location check in
-		else if(request.command == "checkin" && request.latlng ){
-			logger.log("Checking in");
-			location.checkin(socket,client,request);
+		
+		// handle command: login 
+		if(request.command == "login"){ Logger.log("Logging in: "+ message);
+			Auth.login(socket,client,request);
 		}
-		// handle message
-		else if(request.command == "message") {
-			logger.log("Message received");
-			chat.talk(socket,client,request);
+		// handle command: location check in 
+		else if(request.command == "checkin" && request.latlng ){ Logger.log("Checking in: "+ message);
+			Location.checkin(socket,client,request);
+		}
+		
+		// handle command: message
+		else if(request.command == "message"){ Logger.log("Message received: "+ message);
+			Chatbot.message(socket,client,request);
 		}
 		
 	});
 	
+	// on disconnection
 	client.on('disconnect', function() { 
-		// logout session when user disconnected
-		database.get_user_session(client,function(session){
-			if(session){
-				database.logout_session(client, function(res){
-					socketclient.broadcast(socket,"<p style='color:red'>"+session.username+" is disconnected.</p>");
-				});
-			}
-		});
-		return;
+		Auth.logout(socket,client);
 	});
+	
 });
 
 // accept interrupt broadcast
-server.get('/meow/:msg', function(req,res) {
+/*server.get('/meow/:msg', function(req,res) {
 	if(req.params.msg){
-		logger.log(JSON.stringify(req.params.msg));
+		Logger.log(JSON.stringify(req.params.msg));
 		socketclient.broadcast(socket,req.params.msg);
 		res.send(JSON.stringify({status:"OK"}));
 		
 	}else{
-		logger.log("/meow missing params");
+		Logger.log("/meow missing params");
 		res.send(JSON.stringify({errors:"missing parameters"}));
 	}
 
 });
+*/
+var config = require('./lib/config');
+var app = require('./routes').server;
 
+app.listen(config.appPort);
 server.listen(config.serverPort);

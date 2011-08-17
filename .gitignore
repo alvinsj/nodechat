@@ -1,3 +1,4 @@
 .DS_Store
-config.js
 public/chat/js/config.js
+lib/config.js
+DESIGN.md

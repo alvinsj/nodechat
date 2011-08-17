@@ -1,1 +1,1 @@
-var socket = new io.Socket(<yournodeserver.com>,{port:<port number>});
+var socket = new io.Socket("lah.no.de",{port:8888});

@@ -1,7 +1,5 @@
 
 (function(){
-	
-
   // Todo
   window.Message = Backbone.Model.extend({
   
@@ -52,7 +50,7 @@
     tagName: "li",
     className: "message",
   
-    template: _.template("<input type='checkbox' class='message-check' /><div class='message-content'></div><span class='message-destroy'></span><input type='text' class='message-input' />"),
+    template: _.template("<input type='checkbox' class='message-check' style='display:none'/><div class='message-content'></div><span class='message-destroy' style='display:none'></span><input type='text' class='message-input' />"),
   
     events: {
       "click .message-check"      : "toggleDone",
@@ -137,9 +135,9 @@
     
     events: {
       "keypress #new-message" : "createOnEnter",
-	  "keypress #password" : "loginOnEnter",
+	    "keypress #password" : "loginOnEnter",
       "keyup #new-message"    : "showTooltip",
-	  "click #page-title"    : "scroll",
+	    "click #page-title"    : "scroll",
       "click .message-clear"  : "clearCompleted"
     },
   
