@@ -1,59 +1,111 @@
 <!DOCTYPE html>
-<html> 
-	<head>
-		<link href="css/screen.css" media="all" rel="stylesheet" type="text/css"/> 
-		<script src="lib/mootools.js" type="text/javascript" charset="utf-8"></script> 
-		<script src="lib/mootools-more.js" type="text/javascript" charset="utf-8"></script>
-		<script src="lib/mootools-scroll.js" type="text/javascript" charset="utf-8"></script>
-		<script src="lib/underscore-min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="lib/backbone-min.js" type="text/javascript" charset="utf-8"></script>
-		<script language="javascript" src="lib/socket.io.js" type="text/javascript"></script>
-		<script language="javascript" src="js/config.js" type="text/javascript"></script>
-		<script language="javascript" src="js/nodeserver.js" type="text/javascript"></script>
-		<script>
-		var ipaddr = "disable ip tracking";
-		function getip(json){
-		  ipaddr = json.ip; // alerts the ip address
-		}
-		</script>
-		<!--<script type="application/javascript" src="http://jsonip.appspot.com/?callback=getip"> </script>-->
-		<title>socket.io chat</title>
-	</head> 
-<body> 
-	<div id='chatroomapp'> 
-	      <div class='title'> 
-	        <h1><a id="page-title" href="http://github.com/alvinsj/nodechat" style="color:black; text-decoration:none;">nodechat demo</a></h1>
-	      </div> 
-	      <div class='content'> 
-	         
-	        <div id='messages'> 
-	          <ul id='message-list'></ul> 
-	        </div> 
-			<div id='create-message'>
-			  <a name="messagebox"></a> 
-	          <input id='new-message' placeholder='Type in your message here...' type='text' /> 
-	          <span class='ui-tooltip-top'>Press Enter to send message</span> 
-	        </div>
-	      </div> 
-	      <div id='message-stats'></div> 
-		<div id="login">
-			<a name="loginbox"></a>
-			<input id='username' placeholder='username' type='text' /> 
-			<input id='password' placeholder='password' type='password' />
-			<ul id='instructions'> 
-	      		<li>To chat, key in username, password above then press <b>Enter</b>.</li>
-	    	</ul>
-		</div>
-	    </div>
-		
-	    <ul id='instructions'>
-	      <li>a socket.io demo</li> 
-	      <li>running on nodejs, backbonejs, mongodb</li>
-	    </ul>
-	    <div id='credits'> 
-	      a hack by <a href="http://buuuk.com">buUuk</a> developers<br>
-				open sourced: <a href="https://github.com/alvinsj/nodechat">node</a>&nbsp;&nbsp;<a href="https://github.com/honcheng/iOS-nodechat">iOS</a>
-	    </div>
-<script language="javascript" src="js/chatroom.js" type="text/javascript"></script>
-</body> 
-</html> 
+<html>
+  <head>
+    <link href="css/screen.css" media="all" rel="stylesheet" type="text/css" />
+    <script
+      src="lib/mootools.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="lib/mootools-more.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="lib/mootools-scroll.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="lib/underscore-min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="lib/backbone-min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      language="javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+      type="text/javascript"
+    ></script>
+    <script
+      language="javascript"
+      src="js/config.js"
+      type="text/javascript"
+    ></script>
+    <script
+      language="javascript"
+      src="js/nodeserver.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      var ipaddr = "disable ip tracking";
+      function getip(json) {
+        ipaddr = json.ip; // alerts the ip address
+      }
+    </script>
+    <!--<script type="application/javascript" src="http://jsonip.appspot.com/?callback=getip"> </script>-->
+    <title>socket.io chat</title>
+  </head>
+  <body>
+    <div id="chatroomapp">
+      <div class="title">
+        <h1>
+          <a
+            id="page-title"
+            href="http://github.com/alvinsj/nodechat"
+            style="color: black; text-decoration: none;"
+            >nodechat demo</a
+          >
+        </h1>
+      </div>
+      <div class="content">
+        <div id="messages">
+          <ul id="message-list"></ul>
+        </div>
+        <div id="create-message">
+          <a name="messagebox"></a>
+          <input
+            id="new-message"
+            placeholder="Type in your message here..."
+            type="text"
+          />
+          <span class="ui-tooltip-top">Press Enter to send message</span>
+        </div>
+      </div>
+      <div id="message-stats"></div>
+      <div id="login">
+        <a name="loginbox"></a>
+        <input id="username" placeholder="username" type="text" />
+        <input id="password" placeholder="passcode" type="text" />
+        <ul id="instructions">
+          <li>
+            To chat, key in username, password above then press <b>Enter</b>.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ul id="instructions">
+      <li>a socket.io demo</li>
+      <li>running on nodejs, backbonejs, mongodb</li>
+    </ul>
+    <div id="credits">
+      a hack by <a href="http://buuuk.com">buUuk</a> developers<br />
+      open sourced:
+      <a href="https://github.com/alvinsj/nodechat">node</a>&nbsp;&nbsp;<a
+        href="https://github.com/honcheng/iOS-nodechat"
+        >iOS</a
+      >
+    </div>
+    <script
+      language="javascript"
+      src="js/chatroom.js"
+      type="text/javascript"
+    ></script>
+  </body>
+</html>

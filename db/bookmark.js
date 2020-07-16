@@ -1,12 +1,18 @@
+let model;
+
 exports.model = function (mongoose) {
-    var schema = mongoose.Schema;
+  var schema = mongoose.Schema;
 
-    mongoose.model('bookmarks', new schema({
+  if (!model)
+    model = mongoose.model(
+      "bookmarks",
+      new schema({
         message_id: String,
-				user_id: String,
-				created_at: String,
-				updated_at: String
-    }));
+        user_id: String,
+        created_at: String,
+        updated_at: String,
+      })
+    );
 
-    return mongoose.model('bookmarks');
+  return mongoose.model("bookmarks");
 };

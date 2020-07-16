@@ -1,24 +1,23 @@
-var express = require('express'),
-		config = require('./lib/config'),
-		app = express.createServer( express.logger() );
+const config = require("./lib/config");
 
-app.configure('development', function(){
-	app.use(express.static(__dirname + '/public'));
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+module.exports = function (app) {
+  // app.configure("development", function () {
+  app.use(require("express").static(__dirname + "/public"));
+  // });
 
-app.configure('production', function(){
-  var oneYear = 31557600000;
-  app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
-  app.use(express.errorHandler());
-});
+  // app.configure("production", function () {
+  //   var oneYear = 31557600000;
+  //   app.use(
+  //     require("express").static(__dirname + "/public", { maxAge: oneYear })
+  //   );
+  // app.use(express.errorHandler());
+  // });
 
-app.get('/', function(req,res) {
-	res.send('hello world lah!');
-});
+  //   app.get("/", function (req, res) {
+  //     res.send("hello world lah!");
+  //   });
 
-app.get('/chat/?', function(req,res) {
-	res.redirect('chat/');
-});
-
-exports.server = app;
+  //   app.get("/chat/?", function (req, res) {
+  //     res.redirect("chat/");
+  //   });
+};
